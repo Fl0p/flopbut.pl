@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="fb">
+  <!--
+    Two treatments of the same mark: patina letters on dark for a dark browser theme,
+    inverted to dark letters on a patina plate for a light one, so the icon keeps its
+    contrast in either tab bar. Letters are outlines, not text, so no font is involved.
+  -->
+  <style>
+    .plate { fill: #0b1312; }
+    .mark  { fill: #5fb79b; }
+    @media (prefers-color-scheme: light) {
+      .plate { fill: #5fb79b; }
+      .mark  { fill: #0b1312; }
+    }
+  </style>
+
+  <rect class="plate" width="32" height="32"/>
+
+  <g class="mark">
+    <path d="M9 12h9v3.4H9z"/>
+    <path d="M11.8 12.6h3.4V26h-3.4z"/>
+    <path d="M11.8 10.5c0-2.6 1.6-4.3 4.2-4.3h2.2v3.3h-1.8c-.9 0-1.2.5-1.2 1.3v1.7h-3.4z"/>
+    <path d="M19.6 6h3.4v20h-3.4z"/>
+    <path d="M22 13.4h1.6a6.3 6.3 0 0 1 0 12.6H22v-3.3h1.5a3 3 0 0 0 0-6H22z"/>
+  </g>
+</svg>

@@ -46,6 +46,10 @@ const canonical = new URL(Astro.url.pathname, SITE_URL);
     <meta name="theme-color" content="#eef0ea" media="(prefers-color-scheme: light)" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
+    {/* The SVG carries both treatments and swaps them on the browser theme. */}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
     <Font cssVariable="--font-mono" />

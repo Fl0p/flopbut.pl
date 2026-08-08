@@ -1,0 +1,154 @@
+---
+import type { Locale } from '../config.ts';
+import { alternateLinks, useTranslations } from '../i18n/utils.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const alternates = alternateLinks(locale, Astro.url);
+---
+
+<header class="header">
+  <div class="page header-inner">
+    <a class="wordmark" href={locale === 'en' ? '/' : `/${locale}/`}>flopbut.pl</a>
+
+    <div class="controls">
+      <nav class="langs" aria-label={t.nav.language}>
+        {
+          alternates.map(({ locale: alt, path, isCurrent, label }) => (
+            <a
+              href={path}
+              hreflang={alt}
+              lang={alt}
+              title={label}
+              class:list={['lang', { 'lang-current': isCurrent }]}
+              aria-current={isCurrent ? 'true' : undefined}
+            >
+              {alt}
+            </a>
+          ))
+        }
+      </nav>
+
+      <button type="button" id="theme-toggle" class="theme-toggle" title={t.nav.theme}>
+        <span class="sr-only">{t.nav.theme}</span>
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+          <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+          <path d="M8 1a7 7 0 0 0 0 14z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <hr class="rule" />
+</header>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  toggle?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    if (next === 'light') {
+      root.dataset.theme = 'light';
+    } else {
+      delete root.dataset.theme;
+    }
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* nothing to persist to — the toggle still works for this visit */
+    }
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    /* srgb, not oklch: interpolating towards `transparent` in oklch shifts the hue. */
+    background-color: color-mix(in srgb, var(--ink) 88%, transparent);
+    backdrop-filter: blur(10px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.5rem;
+  }
+
+  .wordmark {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .wordmark::before {
+    content: '';
+    display: inline-block;
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-right: 0.55rem;
+    vertical-align: 0.06em;
+    border-radius: 50%;
+    background-color: var(--patina);
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .langs {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .lang {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .lang:hover {
+    color: var(--text);
+  }
+
+  .lang-current {
+    color: var(--brass);
+  }
+
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--line-strong);
+  }
+</style>

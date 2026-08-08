@@ -1,0 +1,509 @@
+---
+import { LINKS, type Locale } from '../config.ts';
+import { STACK_GROUPS, stack } from '../data/stack.ts';
+import { useTranslations } from '../i18n/utils.ts';
+import Crew from './Crew.astro';
+import Header from './Header.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+/** Agent work leads the section on its own row; everything else tiles 2×2 underneath. */
+const primary = t.work.items.orchestration;
+const rest = [t.work.items.mobile, t.work.items.tooling, t.work.items.ksef, t.work.items.hardware];
+
+const numbers = [
+  t.numbers.items.years,
+  t.numbers.items.team,
+  t.numbers.items.users,
+  t.numbers.items.crashFree,
+];
+
+const contacts = [
+  { label: t.contact.email, value: 'flopspm@gmail.com', href: 'mailto:flopspm@gmail.com' },
+  { label: t.contact.github, value: 'Flopsstuff', href: LINKS.github },
+  { label: t.contact.linkedin, value: 'flop-but', href: LINKS.linkedin },
+];
+---
+
+<Header locale={locale} />
+
+<main id="main">
+  <section class="hero">
+    <div class="page">
+      <p class="label hero-meta">
+        <span>{t.hero.location}</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span>52.23°N 21.01°E</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span class="status">{t.hero.status}</span>
+      </p>
+
+      <h1 class="hero-name">{t.hero.name}</h1>
+      <p class="hero-lead">{t.hero.lead}</p>
+      <p class="prose hero-body">{t.hero.body}</p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="numbers" aria-labelledby="numbers-title">
+    <div class="page">
+      <h2 class="sr-only" id="numbers-title">{t.numbers.heading}</h2>
+      <dl class="numbers-row">
+        {
+          numbers.map((item) => (
+            <div class="figure">
+              <dt class="figure-value">{item.value}</dt>
+              <dd class="figure-label">{item.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="section" aria-labelledby="work-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">{t.work.eyebrow}</p>
+        <h2 class="section-title" id="work-title">{t.work.title}</h2>
+      </div>
+
+      <article class="work-lead">
+        <h3 class="work-lead-title">{primary.title}</h3>
+        <p class="work-body work-lead-body">{primary.body}</p>
+      </article>
+
+      <div class="work-grid">
+        {
+          rest.map((item) => (
+            <article class="work-item">
+              <h3 class="work-title">{item.title}</h3>
+              <p class="work-body">{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="section" aria-labelledby="stack-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">{t.stack.eyebrow}</p>
+        <h2 class="section-title" id="stack-title">{t.stack.title}</h2>
+      </div>
+
+      <dl class="stack">
+        {
+          STACK_GROUPS.map((group) => (
+            <div class="stack-row">
+              <dt class="label stack-group">{t.stack.groups[group]}</dt>
+              <dd class="stack-items">{stack[group].join(' · ')}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <Crew locale={locale} />
+
+  <hr class="rule" />
+
+  <section class="section" aria-labelledby="projects-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">{t.projects.eyebrow}</p>
+        <h2 class="section-title" id="projects-title">{t.projects.title}</h2>
+        <p class="prose">{t.projects.body}</p>
+      </div>
+
+      <a class="catalogue" href={LINKS.projects}>
+        <span class="catalogue-cta">{t.projects.cta}</span>
+        <span class="catalogue-arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="label catalogue-note">{t.projects.note}</p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="off-duty">
+    <div class="page off-duty-inner">
+      <p class="label">{t.offDuty.label}</p>
+      <p class="off-duty-items">{t.offDuty.items}</p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="section" aria-labelledby="contact-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">{t.contact.eyebrow}</p>
+        <h2 class="section-title" id="contact-title">{t.contact.title}</h2>
+        <p class="prose">{t.contact.body}</p>
+      </div>
+
+      <ul class="contacts">
+        {
+          contacts.map((item) => (
+            <li class="contact-row">
+              <span class="label contact-label">{item.label}</span>
+              <a class="contact-link" href={item.href}>
+                {item.value}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <hr class="rule" />
+  <div class="page footer-inner">
+    <p class="label">{t.footer.built}</p>
+    <a class="label footer-source" href={LINKS.github}>{t.footer.source}</a>
+  </div>
+</footer>
+
+<style>
+  .hero {
+    padding-block: clamp(3.5rem, 2.5rem + 6vw, 8rem) clamp(3rem, 2rem + 5vw, 6rem);
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  }
+
+  .dot {
+    color: var(--line-strong);
+  }
+
+  .status {
+    color: var(--patina);
+  }
+
+  .status::before {
+    content: '';
+    display: inline-block;
+    width: 0.35rem;
+    height: 0.35rem;
+    margin-right: 0.45rem;
+    vertical-align: 0.08em;
+    border-radius: 50%;
+    background-color: var(--patina);
+    animation: breathe 3.5s ease-in-out infinite;
+  }
+
+  .hero-name {
+    font-size: var(--step-6);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+
+  .hero-lead {
+    max-width: 24ch;
+    margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    font-family: var(--font-display), var(--font-fallback-sans);
+    font-size: var(--step-4);
+    font-weight: 400;
+    line-height: 1.14;
+    letter-spacing: -0.025em;
+    color: var(--brass);
+    text-wrap: balance;
+  }
+
+  .hero-body {
+    margin-top: 1.75rem;
+  }
+
+  /* ---- numbers ---- */
+
+  .numbers {
+    padding-block: clamp(2.25rem, 1.75rem + 2vw, 3.25rem);
+  }
+
+  .numbers-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.5rem;
+    margin: 0;
+  }
+
+  .figure {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .figure-value {
+    font-family: var(--font-display), var(--font-fallback-sans);
+    font-size: var(--step-4);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .figure-label {
+    margin: 0;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    color: var(--muted);
+    text-wrap: balance;
+  }
+
+  /* Hairline separators only once the row is a single line — in 2×2 they read as a table. */
+  @media (min-width: 44rem) {
+    .numbers-row {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .figure {
+      padding-inline: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+      border-inline-start: 1px solid var(--line);
+    }
+
+    .figure:first-child {
+      padding-inline-start: 0;
+      border-inline-start: 0;
+    }
+  }
+
+  /* ---- work ---- */
+
+  /* The day job gets the full width above the 2×2 of side projects. */
+  .work-lead {
+    padding: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .work-lead-title {
+    font-size: var(--step-3);
+    margin-bottom: 0.75rem;
+    color: var(--brass);
+  }
+
+  .work-lead-body {
+    max-width: var(--measure);
+  }
+
+  /*
+    Exactly two columns above the breakpoint: four items tile as 2×2 with no empty cell
+    showing the grid-gap background through. auto-fit would give three and leave a hole.
+  */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background-color: var(--line);
+    border-block: 1px solid var(--line);
+  }
+
+  @media (min-width: 48rem) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .work-item {
+    background-color: var(--ink);
+    padding: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem) clamp(1.25rem, 1rem + 1vw, 2rem);
+  }
+
+  .work-title {
+    font-size: var(--step-2);
+    margin-bottom: 0.75rem;
+  }
+
+  .work-body {
+    color: var(--muted);
+    font-size: var(--step-0);
+  }
+
+  /* ---- stack ---- */
+
+  .stack {
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .stack-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stack-group {
+    align-self: baseline;
+  }
+
+  .stack-items {
+    margin: 0;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  @media (min-width: 40rem) {
+    .stack-row {
+      grid-template-columns: 9rem 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+  }
+
+  /* ---- off duty ---- */
+
+  .off-duty {
+    padding-block: clamp(2rem, 1.5rem + 2vw, 3rem);
+  }
+
+  .off-duty-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1.5rem;
+  }
+
+  .off-duty-items {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+
+  /* ---- catalogue ---- */
+
+  .catalogue {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+    border: 1px solid var(--line-strong);
+    text-decoration: none;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .catalogue:hover {
+    border-color: var(--patina);
+    background-color: var(--surface);
+  }
+
+  .catalogue-cta {
+    font-family: var(--font-display), var(--font-fallback-sans);
+    font-size: var(--step-3);
+    letter-spacing: -0.02em;
+  }
+
+  .catalogue-arrow {
+    font-size: var(--step-3);
+    color: var(--patina);
+    transition: transform 0.2s ease;
+  }
+
+  .catalogue:hover .catalogue-arrow {
+    transform: translateX(0.35rem);
+  }
+
+  .catalogue-note {
+    margin-top: 1rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- contacts ---- */
+
+  .contacts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-link {
+    font-family: var(--font-display), var(--font-fallback-sans);
+    font-size: var(--step-1);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .contact-link:hover {
+    border-bottom-color: var(--patina);
+  }
+
+  .contact-label {
+    min-width: 8rem;
+  }
+
+  /* ---- footer ---- */
+
+  .footer {
+    padding-bottom: 3rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .footer-source {
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .footer-source:hover {
+    color: var(--text);
+    border-bottom-color: var(--patina);
+  }
+
+  @keyframes breathe {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+</style>

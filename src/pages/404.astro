@@ -1,0 +1,61 @@
+---
+import Header from '../components/Header.astro';
+import { LOCALES } from '../config.ts';
+import { dictionaries } from '../i18n/ui.ts';
+import Layout from '../layouts/Layout.astro';
+
+const home = LOCALES.map((locale) => ({
+  locale,
+  path: locale === 'en' ? '/' : `/${locale}/`,
+  label: dictionaries[locale].meta.langName,
+}));
+---
+
+<Layout locale="en">
+  <Header locale="en" />
+
+  <main id="main" class="notfound">
+    <div class="page">
+      <p class="label">Error 404</p>
+      <h1 class="title">This page was never shipped.</h1>
+      <p class="prose">
+        The address does not match anything here. Try the front page in whichever language suits
+        you.
+      </p>
+
+      <ul class="links">
+        {
+          home.map(({ locale, path, label }) => (
+            <li>
+              <a href={path} hreflang={locale} lang={locale}>
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .notfound {
+    padding-block: clamp(4rem, 3rem + 6vw, 9rem);
+  }
+
+  .title {
+    font-size: var(--step-5);
+    margin-block: 1.5rem 1.25rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+  }
+</style>

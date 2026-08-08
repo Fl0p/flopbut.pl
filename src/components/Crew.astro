@@ -1,0 +1,166 @@
+---
+import type { Locale } from '../config.ts';
+import { crew } from '../data/crew.ts';
+import { useTranslations } from '../i18n/utils.ts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="section" aria-labelledby="crew-title">
+  <div class="page">
+    <div class="section-head">
+      <p class="label">{t.crew.eyebrow}</p>
+      <h2 class="section-title" id="crew-title">{t.crew.title}</h2>
+      <p class="prose">{t.crew.body}</p>
+    </div>
+
+    <ul class="roster">
+      {
+        crew.map((member, index) => (
+          <li
+            class:list={['row', { 'row-human': member.human }]}
+            style={`--i: ${index}`}
+          >
+            <span class="pulse" aria-hidden="true" />
+            <span class="name">{member.name}</span>
+            <span class="role">{member.human ? t.crew.human : member.role[locale]}</span>
+            {member.human && <span class="human-note">{member.role[locale]}</span>}
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="punchline">{t.crew.punchline}</p>
+  </div>
+</section>
+
+<style>
+  .roster {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr auto;
+    align-items: baseline;
+    gap: 0 1rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pulse {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background-color: var(--line-strong);
+    justify-self: start;
+    align-self: center;
+    /*
+      One heartbeat travels down the roster and then the list rests — the same
+      wake-up signal the real agents run on, not decoration for its own sake.
+    */
+    animation: heartbeat 7s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.32s);
+  }
+
+  .name {
+    font-family: var(--font-display), var(--font-fallback-sans);
+    font-size: var(--step-1);
+    letter-spacing: -0.015em;
+  }
+
+  .role {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    color: var(--muted);
+    text-align: right;
+  }
+
+  /* The human closes the list: brass instead of patina, and his role spelled out below. */
+  .row-human {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--brass);
+    border-bottom-color: var(--brass);
+    grid-template-areas:
+      'pulse name role'
+      '.     note note';
+  }
+
+  .row-human .pulse {
+    grid-area: pulse;
+    background-color: var(--brass);
+    animation: none;
+  }
+
+  .row-human .name {
+    grid-area: name;
+    color: var(--brass);
+  }
+
+  .row-human .role {
+    grid-area: role;
+    color: var(--brass);
+  }
+
+  .human-note {
+    grid-area: note;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    color: var(--muted);
+    padding-top: 0.35rem;
+  }
+
+  .punchline {
+    max-width: 42ch;
+    margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
+    font-family: var(--font-display), var(--font-fallback-sans);
+    font-size: var(--step-2);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  @keyframes heartbeat {
+    0%,
+    82%,
+    100% {
+      background-color: var(--line-strong);
+      box-shadow: none;
+    }
+    86% {
+      background-color: var(--patina);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--patina) 22%, transparent);
+    }
+    94% {
+      background-color: var(--line-strong);
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .row {
+      grid-template-columns: 1.25rem 1fr;
+      gap: 0.15rem 0.75rem;
+    }
+
+    .role {
+      grid-column: 2;
+      text-align: left;
+    }
+
+    .row-human {
+      grid-template-areas:
+        'pulse name'
+        '.     role'
+        '.     note';
+    }
+  }
+</style>

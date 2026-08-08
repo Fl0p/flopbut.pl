@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "flopbut-pl",
+
+  // Unified Astro entrypoint. Static pages are served straight from assets;
+  // this worker only runs for routes that opted out of prerendering.
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-08-08",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // The adapter splits its output: prerendered pages into dist/client, the worker into
+  // dist/server. After `astro build` wrangler follows the generated dist/client/wrangler.json
+  // rather than this file, so treat the path below as documentation of the same layout.
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+
+  // Once flopbut.pl is added to this Cloudflare account, bind it here:
+  // "routes": [
+  //   { "pattern": "flopbut.pl", "custom_domain": true },
+  //   { "pattern": "www.flopbut.pl", "custom_domain": true }
+  // ]
+}

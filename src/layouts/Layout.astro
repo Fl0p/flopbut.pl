@@ -1,0 +1,64 @@
+---
+import { Font } from 'astro:assets';
+import { DEFAULT_LOCALE, type Locale, SITE_URL } from '../config.ts';
+import { alternateLinks, useTranslations } from '../i18n/utils.ts';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const alternates = alternateLinks(locale, Astro.url);
+const canonical = new URL(Astro.url.pathname, SITE_URL);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <link rel="canonical" href={canonical.href} />
+
+    {
+      alternates.map(({ locale: alt, path }) => (
+        <link rel="alternate" hreflang={alt} href={new URL(path, SITE_URL).href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL('/', SITE_URL).href} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content={locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#0b1312" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eef0ea" media="(prefers-color-scheme: light)" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-mono" />
+
+    {/* Applies the stored theme before first paint so the page never flashes. */}
+    <script is:inline>
+      try {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.dataset.theme = 'light';
+        }
+      } catch {
+        /* private mode — the dark default is fine */
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{t.nav.skipToContent}</a>
+    <slot />
+  </body>
+</html>

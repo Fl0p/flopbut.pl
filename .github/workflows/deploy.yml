@@ -42,3 +42,32 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      # Without this the edge can keep serving the previous HTML for a few minutes, and it
+      # expires page by page: one locale updates while another still shows the old build.
+      # Only the HTML is purged by URL. Hashed assets under /_astro/ get new names anyway,
+      # and purging by host is an Enterprise feature, so listing pages keeps this off the
+      # cache of other sites in the same zone.
+      - name: Purge page cache
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          zone_id=$(curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/zones?name=flopbut.pl" \
+            | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{const j=JSON.parse(d);if(!j.success||!j.result[0])throw new Error('zone lookup failed: '+JSON.stringify(j.errors));process.stdout.write(j.result[0].id)})")
+
+          response=$(curl -sS -X POST \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"files":[
+              "https://flopbut.pl/",
+              "https://flopbut.pl/ru/",
+              "https://flopbut.pl/pl/",
+              "https://www.flopbut.pl/",
+              "https://www.flopbut.pl/ru/",
+              "https://www.flopbut.pl/pl/"
+            ]}' \
+            "https://api.cloudflare.com/client/v4/zones/$zone_id/purge_cache")
+
+          echo "$response" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{const j=JSON.parse(d);if(!j.success)throw new Error('purge failed: '+JSON.stringify(j.errors));console.log('cache purged')})"

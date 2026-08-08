@@ -45,7 +45,8 @@ export default defineConfig({
       name: 'Golos Text',
       cssVariable: '--font-body',
       provider: fontProviders.fontsource(),
-      weights: [400, 500, 600],
+      // Body copy is 400 everywhere; 500 and 600 were declared but never used.
+      weights: [400],
       styles: ['normal'],
       subsets: ['latin', 'latin-ext', 'cyrillic'],
       fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -54,7 +55,7 @@ export default defineConfig({
       name: 'IBM Plex Mono',
       cssVariable: '--font-mono',
       provider: fontProviders.fontsource(),
-      weights: [400, 500],
+      weights: [400],
       styles: ['normal'],
       subsets: ['latin', 'latin-ext', 'cyrillic'],
       fallbacks: ['ui-monospace', 'monospace'],

@@ -4,11 +4,13 @@ import { alternateLinks, useTranslations } from '../i18n/utils.ts';
 
 interface Props {
   locale: Locale;
+  /** Error pages: switch to each locale's home, since the current path has no translations. */
+  toHome?: boolean;
 }
 
-const { locale } = Astro.props;
+const { locale, toHome = false } = Astro.props;
 const t = useTranslations(locale);
-const alternates = alternateLinks(locale, Astro.url);
+const alternates = alternateLinks(locale, toHome ? new URL('/', Astro.url) : Astro.url);
 ---
 
 <header class="header">

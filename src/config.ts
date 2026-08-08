@@ -13,6 +13,8 @@ export const PROJECTS_URL = 'https://stuff.flopbut.pl';
 export const LINKS = {
   /** Organisation account - the project catalogue. Personal account is @Fl0p. */
   github: 'https://github.com/Flopsstuff',
+  /** This site's own repository, linked from the footer. */
+  repo: 'https://github.com/Flopsstuff/flopbut.pl',
   linkedin: 'https://www.linkedin.com/in/flop-but',
   projects: PROJECTS_URL,
 } as const;

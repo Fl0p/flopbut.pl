@@ -112,7 +112,7 @@ const en = {
   },
 
   footer: {
-    built: 'Built with Astro, served from Cloudflare Workers.',
+    built: 'This site is 100% AI generated.',
     source: 'Source on GitHub',
   },
 } as const;
@@ -227,7 +227,7 @@ const ru: Dictionary = {
   },
 
   footer: {
-    built: 'Сделано на Astro, работает на Cloudflare Workers.',
+    built: 'Этот сайт на 100% сгенерирован AI.',
     source: 'Исходники на GitHub',
   },
 };
@@ -339,7 +339,7 @@ const pl: Dictionary = {
   },
 
   footer: {
-    built: 'Zbudowane w Astro, serwowane z Cloudflare Workers.',
+    built: 'Ta strona jest w 100% wygenerowana przez AI.',
     source: 'Kod na GitHubie',
   },
 };

@@ -1,5 +1,5 @@
 /**
- * Tool names are proper nouns — they stay identical across locales, so only the
+ * Tool names are proper nouns - they stay identical across locales, so only the
  * group headings live in the dictionaries. Order here is the order on the page:
  * AI leads, because that is where the work is now.
  */

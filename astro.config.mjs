@@ -15,6 +15,10 @@ export default defineConfig({
     imageService: 'compile',
   }),
 
+  // Nothing here uses sessions. Off means the adapter stops provisioning a KV namespace
+  // for them, and the session runtime drops out of the worker bundle entirely.
+  session: false,
+
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
     locales: [...LOCALES],

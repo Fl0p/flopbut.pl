@@ -6,9 +6,9 @@ import type { Locale } from '../config.ts';
  */
 const en = {
   meta: {
-    title: 'Flop Butylkin — AI orchestration and mobile engineering',
+    title: 'Flop Butylkin - AI orchestration and mobile engineering',
     description:
-      'Flop Butylkin — engineer and tech lead in Warsaw. Twenty years in software: AI agent orchestration and developer tooling now, iOS, Android and React Native delivery behind it.',
+      'Flop Butylkin - engineer and tech lead in Warsaw. Twenty years in software: AI agent orchestration and developer tooling now, iOS, Android and React Native delivery behind it.',
     langName: 'English',
   },
 
@@ -22,8 +22,12 @@ const en = {
     location: 'Warsaw, Poland',
     status: 'Agents on shift',
     name: 'Flop Butylkin',
-    lead: 'I lead engineering teams. Then I automate the parts that hurt.',
-    body: 'Twenty years in software. iOS since the platform existed, React Native since 2019, Android alongside — tech lead, architect, head of mobile, twenty-plus engineers and apps in the hundred-million-user range. These days it is mostly AI: fleets of agents, the tooling that keeps them legible, and whatever else the week calls for.',
+    /* Two deliberate lines - never let the wrap depend on how long a translation is. */
+    lead: {
+      first: 'I lead engineering teams.',
+      second: 'Then I automate the parts that hurt.',
+    },
+    body: 'Twenty years in software. iOS since the platform existed, React Native since 2019, Android alongside - tech lead, architect, head of mobile, twenty-plus engineers and apps in the hundred-million-user range. These days it is mostly AI: fleets of agents, the tooling that keeps them legible, and whatever else the week calls for.',
   },
 
   numbers: {
@@ -52,11 +56,11 @@ const en = {
     items: {
       mobile: {
         title: 'Mobile delivery',
-        body: 'iOS since the platform launched, React Native since 2019, Android alongside. Architecture, team structure, review culture, CI/CD, crash budgets — and the unglamorous work of making releases boring.',
+        body: 'iOS since the platform launched, React Native since 2019, Android alongside. Architecture, team structure, review culture, CI/CD, crash budgets - and the unglamorous work of making releases boring.',
       },
       orchestration: {
         title: 'Agent orchestration',
-        body: 'Fleets of AI agents that plan, build and review with nobody in the loop — until something needs a decision. Paperclip and everything built around it.',
+        body: 'Fleets of AI agents that plan, build and review with nobody in the loop - until something needs a decision. Paperclip and everything built around it.',
       },
       tooling: {
         title: 'Developer tooling',
@@ -93,7 +97,7 @@ const en = {
   projects: {
     eyebrow: 'Weekends',
     title: 'What a Saturday turns into',
-    body: 'Around twenty repositories, all from the past year, all built on weekends: AI tooling, agent orchestration, KSeF, and a few hardware side quests. Not a portfolio — experiments that happen to be open source.',
+    body: 'Around twenty repositories, all from the past year, all built on weekends: AI tooling, agent orchestration, KSeF, and a few hardware side quests. Not a portfolio - experiments that happen to be open source.',
     cta: 'Browse the catalogue',
     note: 'stuff.flopbut.pl',
   },
@@ -118,9 +122,9 @@ type Dictionary = typeof en;
 
 const ru: Dictionary = {
   meta: {
-    title: 'Flop Butylkin — оркестрация AI-агентов и мобильная разработка',
+    title: 'Flop Butylkin - оркестрация AI-агентов и мобильная разработка',
     description:
-      'Flop Butylkin — инженер и тех-лид из Варшавы. Двадцать лет в разработке: сейчас оркестрация AI-агентов и тулинг, за спиной — iOS, Android и React Native.',
+      'Flop Butylkin - инженер и тех-лид из Варшавы. Двадцать лет в разработке: сейчас оркестрация AI-агентов и тулинг, за спиной - iOS, Android и React Native.',
     langName: 'Русский',
   },
 
@@ -134,8 +138,11 @@ const ru: Dictionary = {
     location: 'Варшава, Польша',
     status: 'Агенты на смене',
     name: 'Flop Butylkin',
-    lead: 'Веду инженерные команды. Потом автоматизирую то, что болит.',
-    body: 'Двадцать лет в разработке. iOS — с момента появления платформы, React Native — с 2019-го, Android рядом. Тех-лид, архитектор, head of mobile: больше двадцати инженеров и приложения на сотни миллионов пользователей. Сейчас в основном AI: флот агентов, тулинг, который держит их в поле зрения, и всё остальное, что подкинет неделя.',
+    lead: {
+      first: 'Веду инженерные команды.',
+      second: 'Потом автоматизирую то, что болит.',
+    },
+    body: 'Двадцать лет в разработке. iOS - с момента появления платформы, React Native - с 2019-го, Android рядом. Тех-лид, архитектор, head of mobile: больше двадцати инженеров и приложения на сотни миллионов пользователей. Сейчас в основном AI: флот агентов, тулинг, который держит их в поле зрения, и всё остальное, что подкинет неделя.',
   },
 
   numbers: {
@@ -152,10 +159,10 @@ const ru: Dictionary = {
   crew: {
     eyebrow: 'Смена',
     title: 'Кто на самом деле делает каталог',
-    body: 'Каталог Flopsstuff, который ниже, ведёт флот AI-агентов. Они берут задачи, пишут код, ревьюят друг друга и открывают пулреквесты. Роли настоящие. Стендапы — нет.',
+    body: 'Каталог Flopsstuff, который ниже, ведёт флот AI-агентов. Они берут задачи, пишут код, ревьюят друг друга и открывают пулреквесты. Роли настоящие. Стендапы - нет.',
     roleLabel: 'Роль',
     human: 'Человек',
-    punchline: 'Идти к цели они умеют. Понимать, зачем мы идём, — пока моя работа.',
+    punchline: 'Идти к цели они умеют. Понимать, зачем мы идём, - пока моя работа.',
   },
 
   work: {
@@ -164,11 +171,11 @@ const ru: Dictionary = {
     items: {
       mobile: {
         title: 'Мобильная разработка',
-        body: 'iOS — с момента появления платформы, React Native — с 2019-го, Android рядом. Архитектура, структура команды, культура ревью, CI/CD, бюджеты падений и неблагодарный труд по превращению релизов в скуку.',
+        body: 'iOS - с момента появления платформы, React Native - с 2019-го, Android рядом. Архитектура, структура команды, культура ревью, CI/CD, бюджеты падений и неблагодарный труд по превращению релизов в скуку.',
       },
       orchestration: {
         title: 'Оркестрация агентов',
-        body: 'Флот AI-агентов, которые планируют, пишут и ревьюят без человека в цикле — пока не потребуется решение. Paperclip и всё вокруг него.',
+        body: 'Флот AI-агентов, которые планируют, пишут и ревьюят без человека в цикле - пока не потребуется решение. Paperclip и всё вокруг него.',
       },
       tooling: {
         title: 'Тулинг для разработки',
@@ -176,7 +183,7 @@ const ru: Dictionary = {
       },
       ksef: {
         title: 'Польские е-фактуры',
-        body: 'TypeScript-клиент для API KSeF и английские переводы официальной документации — кому-то надо было прочитать её первым.',
+        body: 'TypeScript-клиент для API KSeF и английские переводы официальной документации - кому-то надо было прочитать её первым.',
       },
       hardware: {
         title: 'Железо, которое отвечает',
@@ -205,7 +212,7 @@ const ru: Dictionary = {
   projects: {
     eyebrow: 'Выходные',
     title: 'Во что превращается суббота',
-    body: 'Около двадцати репозиториев, все за последний год и все — по выходным: AI-тулинг, оркестрация агентов, KSeF и несколько побочных квестов по железу. Это не портфолио, а эксперименты, которые просто оказались с открытым исходным кодом.',
+    body: 'Около двадцати репозиториев, все за последний год и все - по выходным: AI-тулинг, оркестрация агентов, KSeF и несколько побочных квестов по железу. Это не портфолио, а эксперименты, которые просто оказались с открытым исходным кодом.',
     cta: 'Открыть каталог',
     note: 'stuff.flopbut.pl',
   },
@@ -213,7 +220,7 @@ const ru: Dictionary = {
   contact: {
     eyebrow: 'Контакты',
     title: 'Напишите',
-    body: 'Открыт для работы по мобильной разработке, CI/CD, оркестрации агентов и интеграции с KSeF. По-русски или по-английски — как удобнее.',
+    body: 'Открыт для работы по мобильной разработке, CI/CD, оркестрации агентов и интеграции с KSeF. По-русски или по-английски - как удобнее.',
     email: 'Почта',
     github: 'GitHub',
     linkedin: 'LinkedIn',
@@ -227,9 +234,9 @@ const ru: Dictionary = {
 
 const pl: Dictionary = {
   meta: {
-    title: 'Flop Butylkin — orkiestracja agentów AI i inżynieria mobilna',
+    title: 'Flop Butylkin - orkiestracja agentów AI i inżynieria mobilna',
     description:
-      'Flop Butylkin — inżynier i tech lead z Warszawy. Dwadzieścia lat w branży: dziś orkiestracja agentów AI i narzędzia deweloperskie, wcześniej iOS, Android i React Native.',
+      'Flop Butylkin - inżynier i tech lead z Warszawy. Dwadzieścia lat w branży: dziś orkiestracja agentów AI i narzędzia deweloperskie, wcześniej iOS, Android i React Native.',
     langName: 'Polski',
   },
 
@@ -243,7 +250,10 @@ const pl: Dictionary = {
     location: 'Warszawa, Polska',
     status: 'Agenci na zmianie',
     name: 'Flop Butylkin',
-    lead: 'Prowadzę zespoły inżynierskie. Potem automatyzuję to, co boli.',
+    lead: {
+      first: 'Prowadzę zespoły inżynierskie.',
+      second: 'Potem automatyzuję to, co boli.',
+    },
     body: 'Dwadzieścia lat w branży. iOS odkąd platforma istnieje, React Native od 2019, Android obok. Tech lead, architekt, head of mobile: ponad dwudziestu inżynierów i aplikacje z setkami milionów użytkowników. Teraz głównie AI: flota agentów, narzędzia które trzymają je pod kontrolą, i cokolwiek jeszcze przyniesie tydzień.',
   },
 
@@ -264,7 +274,7 @@ const pl: Dictionary = {
     body: 'Katalogiem Flopsstuff poniżej zarządza flota agentów AI. Biorą zadania, piszą kod, recenzują się nawzajem i otwierają pull requesty. Role są prawdziwe. Standupy nie.',
     roleLabel: 'Rola',
     human: 'Człowiek',
-    punchline: 'Iść do celu potrafią. Rozumieć po co idziemy — to wciąż moja robota.',
+    punchline: 'Iść do celu potrafią. Rozumieć po co idziemy - to wciąż moja robota.',
   },
 
   work: {
@@ -277,7 +287,7 @@ const pl: Dictionary = {
       },
       orchestration: {
         title: 'Orkiestracja agentów',
-        body: 'Flota agentów AI, która planuje, buduje i recenzuje bez człowieka w pętli — dopóki nie trzeba podjąć decyzji. Paperclip i wszystko wokół niego.',
+        body: 'Flota agentów AI, która planuje, buduje i recenzuje bez człowieka w pętli - dopóki nie trzeba podjąć decyzji. Paperclip i wszystko wokół niego.',
       },
       tooling: {
         title: 'Narzędzia dla programistów',
@@ -285,7 +295,7 @@ const pl: Dictionary = {
       },
       ksef: {
         title: 'Polskie e-faktury',
-        body: 'Klient TypeScript do API KSeF i angielskie tłumaczenia oficjalnej dokumentacji — ktoś musiał ją przeczytać jako pierwszy.',
+        body: 'Klient TypeScript do API KSeF i angielskie tłumaczenia oficjalnej dokumentacji - ktoś musiał ją przeczytać jako pierwszy.',
       },
       hardware: {
         title: 'Sprzęt, który odpowiada',
@@ -314,7 +324,7 @@ const pl: Dictionary = {
   projects: {
     eyebrow: 'Weekendy',
     title: 'W co zamienia się sobota',
-    body: 'Około dwudziestu repozytoriów, wszystkie z ostatniego roku i wszystkie weekendowe: narzędzia AI, orkiestracja agentów, KSeF i kilka pobocznych questów sprzętowych. To nie portfolio — eksperymenty, które po prostu są open source.',
+    body: 'Około dwudziestu repozytoriów, wszystkie z ostatniego roku i wszystkie weekendowe: narzędzia AI, orkiestracja agentów, KSeF i kilka pobocznych questów sprzętowych. To nie portfolio - eksperymenty, które po prostu są open source.',
     cta: 'Zobacz katalog',
     note: 'stuff.flopbut.pl',
   },

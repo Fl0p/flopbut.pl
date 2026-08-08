@@ -11,7 +11,7 @@ export type Locale = (typeof LOCALES)[number];
 export const PROJECTS_URL = 'https://stuff.flopbut.pl';
 
 export const LINKS = {
-  /** Organisation account — the project catalogue. Personal account is @Fl0p. */
+  /** Organisation account - the project catalogue. Personal account is @Fl0p. */
   github: 'https://github.com/Flopsstuff',
   linkedin: 'https://www.linkedin.com/in/flop-but',
   projects: PROJECTS_URL,

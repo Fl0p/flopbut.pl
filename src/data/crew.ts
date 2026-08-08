@@ -5,7 +5,7 @@ type Localized = Record<Locale, string>;
 export interface CrewMember {
   name: string;
   role: Localized;
-  /** The human gets a different visual treatment — he is the punchline of the list. */
+  /** The human gets a different visual treatment - he is the punchline of the list. */
   human?: boolean;
 }
 

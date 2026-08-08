@@ -2,7 +2,7 @@
 
 Personal site of Flop Butylkin. Astro, deployed to Cloudflare Workers.
 
-Static by default — every page is prerendered and served from Workers Static Assets. Only
+Static by default - every page is prerendered and served from Workers Static Assets. Only
 `/api/contact` runs on the worker, and only once its secrets are set.
 
 ## Stack
@@ -12,7 +12,7 @@ Static by default — every page is prerendered and served from Workers Static A
 | Framework  | Astro 7, static output with an SSR escape hatch per route          |
 | Hosting    | Cloudflare Workers (`@astrojs/cloudflare`)                         |
 | Styling    | Tailwind 4 tokens over hand-written component CSS                  |
-| Fonts      | Geologica, Golos Text, IBM Plex Mono — self-hosted, subset at build |
+| Fonts      | Geologica, Golos Text, IBM Plex Mono - self-hosted, subset at build |
 | Languages  | English at the root, Russian under `/ru/`, Polish under `/pl/`     |
 | Tooling    | TypeScript strict, Biome, GitHub Actions                          |
 
@@ -39,7 +39,7 @@ The catalogue this site links out to lives at [stuff.flopbut.pl](https://stuff.f
 Pushes to `main` build and deploy through `.github/workflows/deploy.yml`. Two repository
 secrets are required:
 
-- `CLOUDFLARE_API_TOKEN` — a token with the *Edit Cloudflare Workers* template
+- `CLOUDFLARE_API_TOKEN` - a token with the *Edit Cloudflare Workers* template
 - `CLOUDFLARE_ACCOUNT_ID`
 
 The custom domain is not bound yet. Once `flopbut.pl` is on the account, uncomment the
@@ -48,10 +48,10 @@ The custom domain is not bound yet. Once `flopbut.pl` is on the account, uncomme
 ## Contact form
 
 `src/pages/api/contact.ts` is written and dormant. It answers 503 until three secrets exist:
-`TURNSTILE_SECRET`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` — see `.dev.vars.example`. The
+`TURNSTILE_SECRET`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` - see `.dev.vars.example`. The
 pipeline is validation → honeypot → Turnstile siteverify → Telegram. Turning it on means
 setting the secrets and adding the form markup; the endpoint itself needs no changes.
 
 ## Licence
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).

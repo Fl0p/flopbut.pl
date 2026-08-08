@@ -18,11 +18,20 @@
 
   "observability": {
     "enabled": true
-  }
+  },
 
-  // Once flopbut.pl is added to this Cloudflare account, bind it here:
-  // "routes": [
-  //   { "pattern": "flopbut.pl", "custom_domain": true },
-  //   { "pattern": "www.flopbut.pl", "custom_domain": true }
-  // ]
+  // Kept on as a fallback while the apex settles; safe to set false afterwards.
+  "workers_dev": true,
+
+  // A plain route rather than `custom_domain`: the apex still carries leftover A records,
+  // and Cloudflare refuses to attach a custom domain over externally managed DNS. Those
+  // records are proxied, so the worker intercepts the request before any origin is reached.
+  // Deleting them and switching to custom_domain is the tidier end state.
+  // www is included because its CNAME resolves to the apex, whose leftover A records are
+  // dead; without its own route it would 522. The canonical tag points at the apex, so
+  // serving both hostnames does not create a duplicate in search results.
+  "routes": [
+    { "pattern": "flopbut.pl/*", "zone_name": "flopbut.pl" },
+    { "pattern": "www.flopbut.pl/*", "zone_name": "flopbut.pl" }
+  ]
 }

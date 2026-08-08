@@ -17,7 +17,7 @@ export function useTranslations(locale: Locale): Dictionary {
 
 /**
  * Builds a path for a locale. The default locale sits at the root, the others
- * under their own prefix — matching `prefixDefaultLocale: false` in the Astro config.
+ * under their own prefix - matching `prefixDefaultLocale: false` in the Astro config.
  */
 export function localizedPath(locale: Locale, path = '/'): string {
   const clean = path.startsWith('/') ? path : `/${path}`;

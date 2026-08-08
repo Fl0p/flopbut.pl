@@ -2,7 +2,7 @@ import { env } from 'cloudflare:workers';
 import type { APIRoute } from 'astro';
 
 /**
- * Contact endpoint — the one route that runs on the worker instead of being prerendered.
+ * Contact endpoint - the one route that runs on the worker instead of being prerendered.
  *
  * It is deliberately dormant: with no delivery secrets configured it answers 503 and nothing
  * else in the site depends on it. To switch the contact form on, set the secrets listed in
@@ -12,7 +12,7 @@ import type { APIRoute } from 'astro';
 export const prerender = false;
 
 interface ContactEnv {
-  /** Server-side half of the Turnstile keypair. Required — no captcha, no submissions. */
+  /** Server-side half of the Turnstile keypair. Required - no captcha, no submissions. */
   TURNSTILE_SECRET?: string;
   /** Telegram delivery. Both must be present to be used. */
   TELEGRAM_BOT_TOKEN?: string;

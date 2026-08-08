@@ -115,9 +115,13 @@ const en = {
     built: 'This site is 100% AI generated.',
     source: 'Source on GitHub',
   },
-} as const;
+};
 
-/** Shape every locale has to satisfy. */
+/**
+ * Shape every locale has to satisfy. Deliberately not `as const`: the contract is the set of
+ * keys, not the English wording, and freezing the literals would make every translation a
+ * type error.
+ */
 type Dictionary = typeof en;
 
 const ru: Dictionary = {

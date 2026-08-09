@@ -21,7 +21,13 @@ The only name that appears anywhere public is **Flop Butylkin**. Never substitut
 
 All copy lives in `src/i18n/ui.ts`. The English dictionary defines the shape and the other
 locales are typed against it, so a missing translation is a build error rather than a blank
-line. Tool names in `src/data/stack.ts` and agent names in `src/data/crew.ts` are not translated.
+line. Tool names in `src/data/stack.ts` and agent names with the model each one runs on in
+`src/data/crew.ts` are not translated.
+
+The roster in `src/data/crew.ts` mirrors the real Paperclip company, so it goes stale whenever
+somebody is hired, retired or moved onto another model. Check it against the live roster
+(`GET /api/companies/{id}/agents`) before claiming it is current; internal utility agents that
+do not ship anything stay off the list.
 
 Facts that are easy to get wrong: iOS dates back to the launch of the platform, with no
 specific year given; React Native is strictly since 2019; Android belongs in the stack too.

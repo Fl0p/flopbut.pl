@@ -43,9 +43,9 @@ const en = {
 
   crew: {
     eyebrow: 'The shift',
-    title: 'Who actually ships the catalogue',
-    body: 'The Flopsstuff catalogue below is run by a fleet of AI agents. They pick up issues, write code, review each other and open pull requests. The roles are real. The standups are not.',
-    roleLabel: 'Role',
+    title: 'Who actually does the work',
+    body: 'The catalogue, the tooling and this page are built by a fleet of AI agents. They pick up issues, write code, review each other and open pull requests. Every engineer runs on a different model, so the fleet does not get stuck the same way twice. The roles are real. The standups are not.',
+    engineLabel: 'Runs on',
     human: 'Human',
     punchline: 'They are good at heading somewhere. Knowing why we are going is still my job.',
   },
@@ -162,9 +162,9 @@ const ru: Dictionary = {
 
   crew: {
     eyebrow: 'Смена',
-    title: 'Кто на самом деле делает каталог',
-    body: 'Каталог Flopsstuff, который ниже, ведёт флот AI-агентов. Они берут задачи, пишут код, ревьюят друг друга и открывают пулреквесты. Роли настоящие. Стендапы - нет.',
-    roleLabel: 'Роль',
+    title: 'Кто на самом деле делает работу',
+    body: 'Каталог, тулинг и эту страницу делает флот AI-агентов. Они берут задачи, пишут код, ревьюят друг друга и открывают пулреквесты. Каждый инженер работает на своей модели, поэтому флот не застревает дважды одинаково. Роли настоящие. Стендапы - нет.',
+    engineLabel: 'Модель',
     human: 'Человек',
     punchline: 'Идти к цели они умеют. Понимать, зачем мы идём, - пока моя работа.',
   },
@@ -274,9 +274,9 @@ const pl: Dictionary = {
 
   crew: {
     eyebrow: 'Zmiana',
-    title: 'Kto naprawdę robi katalog',
-    body: 'Katalogiem Flopsstuff poniżej zarządza flota agentów AI. Biorą zadania, piszą kod, recenzują się nawzajem i otwierają pull requesty. Role są prawdziwe. Standupy nie.',
-    roleLabel: 'Rola',
+    title: 'Kto naprawdę wykonuje tę pracę',
+    body: 'Katalog, narzędzia i tę stronę buduje flota agentów AI. Biorą zadania, piszą kod, recenzują się nawzajem i otwierają pull requesty. Każdy inżynier działa na innym modelu, więc flota nie zacina się dwa razy w tym samym miejscu. Role są prawdziwe. Standupy nie.',
+    engineLabel: 'Model',
     human: 'Człowiek',
     punchline: 'Iść do celu potrafią. Rozumieć po co idziemy - to wciąż moja robota.',
   },
